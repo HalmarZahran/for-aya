@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Email from Halmar</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "SF Pro Display", "Poppins", sans-serif;
+  }
+
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(120deg, #e3e6ed, #d6dae4, #c7ccd9);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+  }
+
+  .iphone {
+    width: 370px;
+    height: 760px;
+    border-radius: 55px;
+    background: #000;
+    padding: 14px;
+    box-shadow: 0 0 55px rgba(0, 0, 0, 0.45);
+    position: relative;
+  }
+
+  .screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 45px;
+    overflow: hidden;
+    position: relative;
+    background: #000;
+  }
+
+  .wallpaper {
+    width: 100%;
+    height: 100%;
+    background-image: url("aya4.jpeg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 32px;
+    background: #000;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: 10;
+  }
+
+  .status-bar {
+    position: absolute;
+    top: 12px;
+    width: 100%;
+    padding: 0 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .right-icons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .icon {
+    width: 22px;
+    filter: brightness(200%);
+  }
+
+  .notif {
+    position: absolute;
+    top: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.86);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    opacity: 0;
+    animation: notifCome 1.2s ease forwards 1.2s;
+  }
+
+  @keyframes notifCome {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -25px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
+    }
+  }
+
+  .notif-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #ff453a, #ff7b72);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 12px;
+    font-size: 20px;
+  }
+
+  .notif-text b {
+    font-size: 15px;
+  }
+  .notif-text span {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  .music-bar {
+    position: absolute;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 86%;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    transition: 0.8s;
+  }
+
+  .music-bar img {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .music-info {
+    flex: 1;
+    margin-left: 12px;
+  }
+
+  .music-info b {
+    font-size: 14px;
+  }
+
+  .music-info span {
+    font-size: 11px;
+    opacity: 0.6;
+  }
+
+  .play-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .email-screen {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(40px);
+    transition: 0.8s ease;
+    overflow-y: auto;
+    height: 100%;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+  }
+
+  .email-topbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 58px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 17px;
+    font-weight: 600;
+    border-bottom: 1px solid #e6e6e6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    z-index: 99;
+  }
+
+  .email-container {
+    padding: 20px 26px;
+  }
+
+  .email-body {
+    font-size: 16px;
+    line-height: 1.63;
+    color: #2a2a2a;
+    white-space: pre-line;
+  }
+
+  .email-screen::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .email-screen::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+  }
+</style>
+</head>
+<body>
+  <div class="iphone">
+    <div class="screen">
+
+      <div class="status-bar">
+        <span class="time"></span>
+        <div class="right-icons">
+          <img src="signal.png" class="icon" />
+          <img src="wifi.png" class="icon" />
+          <img src="battery.png" class="icon" />
+        </div>
+      </div>
+
+      <div class="wallpaper"></div>
+
+      <div class="notif" onclick="openEmail()">
+        <div class="notif-icon">
+          <img src="gmail.png" style="width:26px; height:26px;" />
+        </div>
+        <div class="notif-text">
+          <b>New Email</b>
+          <span>Someone sent you email click here to Open </span>
+        </div>
+      </div>
+
+      <div class="music-bar" id="musicBar">
+        <img src="novo.jpeg" alt="cover" />
+        <div class="music-info">
+          <b>Novo Amor - Anchor</b><br />
+          <span>Spotify</span>
+        </div>
+        <div class="play-btn" onclick="toggleMusic()">▶</div>
+      </div>
+
+      <!-- EMAIL SCREEN -->
+      <div class="email-screen" id="emailScreen">
+        <div class="email-topbar">Message</div>
+
+        <div class="email-container">
+          <!-- tempat tulisan mengetik -->
+          <div class="email-body" id="typeText"></div>
+        </div>
+      </div>
+
+      <audio id="bgMusic" src="Novo Amor - Anchor (official video).mp3"></audio>
+
+      <script>
+        const fullText = `
+Halo sayangku,
+
+Terimakasih sudah selalu sama aku, sudah mau bareng terus sama aku.
+Aku sayangg banget sama kamu, aku cinta banget sama kamu.
+
+Aku harap perasaan kamu ke aku gaakan pernah berubah,
+dan perasaan aku ke kamu juga gaakan berubah.
+
+Kamu cewe paling cantik yang pernah aku kenal,
+kamu baik, imut, lucu, dan sempurna di mata aku.
+
+Kamu jangan pernah mikir aku bakal ninggalin kamu,
+aku gaaakan ninggalin kamu. Aku beneran sayang sama kamu.
+
+Maafin kalau aku banyak salahnya,
+maafin juga kalau kamu banyak sedihnya sama aku.
+
+Aku tiap hari berusaha buat berubah buat kamu,
+aku mau jadi lebih baik lagi buat kamu.
+
+Aku beneran minta maaf atas hal yang terjadi akhir-akhir ini,
+aku beneran minta maaf.
+
+Aku sayanggg sama kamu. Nanti kalau kita ketemu,
+kita peluk yang lama yaa.
+
+Aku gamau ada yang ganggu lagi hubungan kita,
+gamau ada hal-hal lain lagi.
+
+I love you so much sayanggg,
+I'll always be here for you, anytime, my love. ❤️
+
+-halmar
+`;
+
+       let index = 0;
+let typingSpeed = 70; // versi diperlambat
+
+function typeWriter() {
+  if (index < fullText.length) {
+    document.getElementById("typeText").innerHTML += fullText.charAt(index);
+    index++;
+    setTimeout(typeWriter, typingSpeed);
+  }
+}
+
+
+        // Show music bar
+        setTimeout(() => {
+          document.getElementById("musicBar").style.opacity = "1";
+        }, 2200);
+
+        // Open Email
+        function openEmail() {
+          const email = document.getElementById("emailScreen");
+          email.style.opacity = "1";
+          email.style.pointerEvents = "auto";
+          email.style.transform = "translateY(0)";
+          
+          setTimeout(() => {
+            typeWriter();
+          }, 500);
+        }
+
+        let isPlaying = false;
+
+        function toggleMusic() {
+          const music = document.getElementById("bgMusic");
+          const btn = document.querySelector(".play-btn");
+
+          if (!isPlaying) {
+            music.play();
+            btn.textContent = "⏸";
+            isPlaying = true;
+          } else {
+            music.pause();
+            btn.textContent = "▶";
+            isPlaying = false;
+          }
+        }
+      </script>
+</body>
+</html>
